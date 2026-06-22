@@ -1,0 +1,3 @@
+.mobile-nav { grid-template-columns: 1fr 1fr; }
+body { padding-bottom: 120px; }
+code { font-size: 0.8rem; color: var(--accent); }

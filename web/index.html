@@ -57,6 +57,14 @@
       <button class="btn primary" onclick="saveRules()">保存规则</button>
       <div id="rules-msg" class="item-meta"></div>
     </section>
+
+    <section id="panel-sync" class="panel">
+      <p class="item-meta">粘贴手机导出的 JSON，合并到电脑本地（真实成本进 private.json，不上传 Git）。</p>
+      <textarea id="sync-json" rows="12" placeholder='{"positions":[...]}'></textarea>
+      <button class="btn primary" onclick="importFromPhone()">从手机导入</button>
+      <p class="item-meta">手机入口：<a href="/static/mobile.html" target="_blank">/static/mobile.html</a>（可添加到主屏幕，任意地点使用）</p>
+      <div id="sync-msg" class="item-meta"></div>
+    </section>
   </main>
 
   <nav class="bottom-nav">
@@ -67,6 +75,7 @@
     <button data-tab="review">复盘</button>
     <button data-tab="discipline">纪律</button>
     <button data-tab="rules">规则</button>
+    <button data-tab="sync">同步</button>
   </nav>
 
   <script src="/static/app.js"></script>

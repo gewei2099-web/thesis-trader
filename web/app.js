@@ -42,6 +42,7 @@ function refreshCurrentTab(tab) {
   if (tab === "thesis") renderThesis();
   if (tab === "discipline") loadDiscipline();
   if (tab === "rules") loadRules();
+  if (tab === "sync") document.getElementById("sync-msg").textContent = "";
 }
 
 async function init() {
@@ -354,6 +355,18 @@ async function saveRules() {
     loadDecisions();
   } catch (e) {
     document.getElementById("rules-msg").textContent = "保存失败：" + e.message;
+  }
+}
+
+async function importFromPhone() {
+  try {
+    const payload = JSON.parse(document.getElementById("sync-json").value);
+    const res = await api("/api/import-local", { method: "POST", body: JSON.stringify({ payload }) });
+    document.getElementById("sync-msg").textContent = `已导入 ${res.positions} 条持仓到电脑本地。`;
+    renderPositions();
+    loadDecisions();
+  } catch (e) {
+    document.getElementById("sync-msg").textContent = "导入失败：" + e.message;
   }
 }
 

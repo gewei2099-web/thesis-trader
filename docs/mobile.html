@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function () {
+      var path = location.pathname;
+      var basePath = path.endsWith("/") ? path : (/\.[a-z0-9]+$/i.test(path.split("/").pop() || "") ? path.slice(0, path.lastIndexOf("/") + 1) : path + "/");
+      var base = document.createElement("base");
+      base.href = basePath;
+      document.head.appendChild(base);
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>thesis-trader 手机本地</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./mobile.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>本地持仓编辑</h1>
+    <p id="save-status">数据仅保存在本手机，不上传 GitHub</p>
+  </header>
+
+  <main>
+    <section id="panel-positions" class="panel active">
+      <div id="positions-list"></div>
+      <button class="btn" type="button" id="btn-add">+ 添加持仓</button>
+      <div id="position-form" class="form-card hidden"></div>
+    </section>
+
+    <section id="panel-sync" class="panel">
+      <div class="item-card item-meta">
+        回家后在电脑 <code>run.bat</code> → <strong>同步</strong> 页，粘贴下方导出的 JSON，即可合并到电脑（仍不上传真实成本到 Git）。
+      </div>
+      <button class="btn primary" type="button" id="btn-export">导出 JSON（复制到剪贴板）</button>
+      <button class="btn" type="button" id="btn-download">下载 JSON 文件</button>
+      <label>从备份恢复（粘贴 JSON）</label>
+      <textarea id="import-json" rows="8" placeholder='{"positions":[...]}'></textarea>
+      <button class="btn" type="button" id="btn-import">导入到本手机</button>
+    </section>
+  </main>
+
+  <nav class="bottom-nav mobile-nav">
+    <button type="button" data-tab="positions" class="active">持仓</button>
+    <button type="button" data-tab="sync">同步</button>
+  </nav>
+
+  <script src="./mobile.js"></script>
+</body>
+</html>

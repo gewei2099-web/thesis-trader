@@ -55,6 +55,12 @@ def build() -> Path:
         encoding="utf-8",
     )
 
+    web_src = ROOT / "web"
+    for name in ("mobile.html", "mobile.js", "mobile.css"):
+        src = web_src / name
+        if src.exists():
+            shutil.copy2(src, DOCS / name)
+
     print(f"Built public GitHub Pages site at {DOCS}")
     print(f"  public summary only (no raw data/)")
     print(f"  reviews: {len(reviews_index)}")

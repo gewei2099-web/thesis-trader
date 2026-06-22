@@ -118,7 +118,8 @@ textarea { resize: vertical; min-height: 120px; }
   position: fixed;
   bottom: 0; left: 0; right: 0;
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, auto);
   background: #0b1220;
   border-top: 1px solid var(--border);
   padding: 6px 4px;

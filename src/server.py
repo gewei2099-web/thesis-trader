@@ -14,6 +14,7 @@ from pydantic import BaseModel
 from src.config.rules import RulesConfig, get_rules, load_rules, save_rules
 from src.discipline.layer import acknowledge_entry, build_alerts, log_alerts
 from src.engine.decision import evaluate_all
+from src.import_local import import_local_payload
 from src.models.enums import (
     ACTION_LABELS,
     ActionType,
@@ -177,6 +178,19 @@ def update_rules_config(payload: RulesConfig) -> dict:
     save_rules(payload, ROOT)
     get_rules.cache_clear()
     return {"ok": True}
+
+
+class ImportLocalRequest(BaseModel):
+    payload: dict[str, Any]
+
+
+@app.post("/api/import-local")
+def import_from_phone(payload: ImportLocalRequest) -> dict:
+    try:
+        result = import_local_payload(store, payload.payload)
+    except (ValueError, KeyError) as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {"ok": True, **result}
 
 
 @app.get("/api/meta/enums")

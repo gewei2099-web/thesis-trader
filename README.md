@@ -39,6 +39,21 @@ cd D:\Projects\thesis-trader
 copy data\local\private.json.example data\local\private.json
 ```
 
+## 手机本地改持仓（不上传 GitHub）
+
+任意地点用手机，**无需电脑开机**：
+
+1. 打开（可「添加到主屏幕」）  
+   **https://gewei2099-web.github.io/thesis-trader/mobile.html**
+2. 编辑持仓 → **自动保存在本手机**（localStorage）
+3. 数据**不会**上传到 GitHub
+
+回家同步到电脑：
+
+1. 手机 → **同步** → **导出 JSON**（复制到剪贴板）
+2. 电脑 `run.bat` → **同步** 页 → 粘贴 → **从手机导入**
+3. 真实成本写入 `private.json`，决策引擎在电脑上完整运行
+
 ## 手机公开页（摘要 · 无敏感数据）
 
 **https://gewei2099-web.github.io/thesis-trader/**
