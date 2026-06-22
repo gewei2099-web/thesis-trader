@@ -1,0 +1,10 @@
+{
+  "name": "thesis-trader",
+  "short_name": "ThesisTrader",
+  "description": "交易决策辅助系统（只读）",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "lang": "zh-CN"
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>thesis-trader</title>
+  <link rel="manifest" href="/static/manifest.json" />
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>thesis-trader</h1>
+    <p>交易决策辅助系统</p>
+  </header>
+
+  <main id="app">
+    <section id="panel-dashboard" class="panel active">
+      <div class="card-grid" id="dashboard-cards"></div>
+      <button class="btn primary" onclick="loadDecisions()">刷新决策引擎</button>
+      <div id="dashboard-alerts" class="alert-list"></div>
+    </section>
+
+    <section id="panel-watchlist" class="panel">
+      <div id="watchlist-list"></div>
+      <button class="btn" onclick="showWatchForm()">+ 添加股票</button>
+      <div id="watch-form" class="form-card hidden"></div>
+    </section>
+
+    <section id="panel-positions" class="panel">
+      <div id="positions-list"></div>
+      <button class="btn" onclick="showPositionForm()">+ 添加持仓</button>
+      <div id="position-form" class="form-card hidden"></div>
+    </section>
+
+    <section id="panel-thesis" class="panel">
+      <div id="thesis-list"></div>
+      <button class="btn" onclick="showThesisForm()">+ 逻辑卡片</button>
+      <div id="thesis-form" class="form-card hidden"></div>
+    </section>
+
+    <section id="panel-review" class="panel">
+      <label>今日市场 / 公司信息（粘贴）</label>
+      <textarea id="market-info" rows="8" placeholder="粘贴新闻、公告、价格变化等..."></textarea>
+      <button class="btn primary" onclick="runReview()">生成每日复盘</button>
+      <pre id="review-output" class="review-output"></pre>
+    </section>
+
+    <section id="panel-discipline" class="panel">
+      <div id="discipline-list"></div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <button data-tab="dashboard" class="active">首页</button>
+    <button data-tab="watchlist">股票池</button>
+    <button data-tab="positions">持仓</button>
+    <button data-tab="thesis">逻辑</button>
+    <button data-tab="review">复盘</button>
+    <button data-tab="discipline">纪律</button>
+  </nav>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

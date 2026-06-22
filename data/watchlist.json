@@ -1,0 +1,22 @@
+{
+  "items": [
+    {
+      "symbol": "002738",
+      "name": "中矿资源",
+      "stock_type": "cycle",
+      "status": "watching",
+      "added_reason": "锂周期底部观察，等待价格拐点确认",
+      "added_at": "2026-06-01",
+      "notes": ""
+    },
+    {
+      "symbol": "603893",
+      "name": "瑞芯微",
+      "stock_type": "growth",
+      "status": "ready",
+      "added_reason": "AIoT 芯片成长逻辑，跟踪收入增速",
+      "added_at": "2026-06-10",
+      "notes": ""
+    }
+  ]
+}

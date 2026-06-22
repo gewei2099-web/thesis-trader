@@ -1,0 +1,9 @@
+[project]
+name = "thesis-trader"
+version = "0.1.0"
+description = "Personal trading decision support system"
+requires-python = ">=3.10"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
