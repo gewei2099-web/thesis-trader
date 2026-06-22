@@ -12,6 +12,33 @@ cd D:\Projects\thesis-trader
 
 访问 **http://localhost:8765** — 含持仓成本、逻辑卡片、规则配置、纪律确认。
 
+## 方案 A：公开仓库 + 本地真实数据
+
+仓库保持 **Public**，GitHub Pages 只展示摘要（无真实成本）。
+
+### 真实成本/股数存哪里？
+
+| 文件 | 是否提交 Git | 内容 |
+|------|-------------|------|
+| `data/positions.json` | ✅ 提交 | 占位数据（股数 100、成本=现价），供 Actions 更新收盘价 |
+| `data/local/private.json` | ❌ 不提交 | **真实**股数、成本、备注 |
+
+本地 Web 保存持仓时：
+1. 真实数据写入 `data/local/private.json`（自动）
+2. 占位数据写入 `data/positions.json`（推送远端）
+
+`git pull` 后 Actions 更新的**现价**会合并进来，**真实成本/股数不会被覆盖**。
+
+### 首次填写真实持仓
+
+```powershell
+# 方式 1：本地 Web 编辑持仓并保存一次
+.\run.bat
+
+# 方式 2：复制示例后改数字
+copy data\local\private.json.example data\local\private.json
+```
+
 ## 手机公开页（摘要 · 无敏感数据）
 
 **https://gewei2099-web.github.io/thesis-trader/**
@@ -21,7 +48,7 @@ Pages 仅发布：
 - `reports/*.md` — 复盘报告
 - **速记按钮** — 跳转 GitHub Issue 记录盘中想法
 
-完整 `data/` 不在 Pages 上展示。**若仓库为 Public，GitHub 主分支上的 data/ 仍可见，建议将仓库设为 Private。**
+完整 `data/` 不在 Pages 上展示；`positions.json` 在 Git 上仅为占位值。
 
 ## 自动化（GitHub Actions）
 

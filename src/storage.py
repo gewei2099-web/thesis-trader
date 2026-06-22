@@ -12,6 +12,7 @@ from src.models.discipline import DisciplineLog
 from src.models.positions import Positions
 from src.models.thesis import ThesisCard
 from src.models.watchlist import Watchlist
+from src.private_overlay import load_positions_merged, save_positions_split
 
 T = TypeVar("T", bound=BaseModel)
 
@@ -49,10 +50,10 @@ class DataStore:
         self._write(self.data_dir / "watchlist.json", watchlist)
 
     def load_positions(self) -> Positions:
-        return self._read(self.data_dir / "positions.json", Positions)
+        return load_positions_merged(self.data_dir)
 
     def save_positions(self, positions: Positions) -> None:
-        self._write(self.data_dir / "positions.json", positions)
+        save_positions_split(self.data_dir, positions)
 
     def load_discipline_log(self) -> DisciplineLog:
         return self._read(self.data_dir / "discipline_log.json", DisciplineLog)

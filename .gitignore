@@ -7,3 +7,6 @@ __pycache__/
 .DS_Store
 Thumbs.db
 *.log
+
+# 真实成本/股数（仅本地，勿提交）
+data/local/private.json
