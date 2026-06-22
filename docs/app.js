@@ -1,4 +1,4 @@
-const DATA = "./data";
+const DATA = "data";
 
 const TYPE_LABELS = { cycle: "周期", growth: "成长", event: "事件" };
 const TREND_LABELS = { up: "上涨", range: "震荡", down: "下跌" };
@@ -13,14 +13,16 @@ let disciplineLog = { entries: [] };
 let reviewsIndex = [];
 
 async function loadJson(path) {
-  const res = await fetch(path, { cache: "no-cache" });
-  if (!res.ok) throw new Error(`无法加载 ${path}`);
+  const url = new URL(path, document.baseURI).href;
+  const res = await fetch(url, { cache: "no-cache" });
+  if (!res.ok) throw new Error(`无法加载 ${url}`);
   return res.json();
 }
 
 async function loadText(path) {
-  const res = await fetch(path, { cache: "no-cache" });
-  if (!res.ok) throw new Error(`无法加载 ${path}`);
+  const url = new URL(path, document.baseURI).href;
+  const res = await fetch(url, { cache: "no-cache" });
+  if (!res.ok) throw new Error(`无法加载 ${url}`);
   return res.text();
 }
 
@@ -181,7 +183,7 @@ function renderReviewList() {
 }
 
 async function showReview(path) {
-  const text = await loadText(`./${path}`);
+  const text = await loadText(path);
   const out = document.getElementById("review-output");
   out.textContent = text;
   out.classList.remove("hidden");
@@ -207,7 +209,10 @@ function renderDiscipline() {
 }
 
 init().catch((err) => {
-  document.body.insertAdjacentHTML("afterbegin",
-    `<div class="alert-box" style="margin:12px">加载失败：${err.message}。请确认 GitHub Pages 已启用且 docs/ 已构建。</div>`
+  document.body.insertAdjacentHTML(
+    "afterbegin",
+    `<div class="alert-box" style="margin:12px">加载失败：${err.message}<br><small>当前地址：${location.href}</small></div>`
   );
 });
+
+window.showReview = showReview;

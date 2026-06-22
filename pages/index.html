@@ -2,6 +2,22 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    (function () {
+      var path = location.pathname;
+      var basePath;
+      if (path.endsWith("/")) {
+        basePath = path;
+      } else if (/\.[a-z0-9]+$/i.test(path.split("/").pop() || "")) {
+        basePath = path.slice(0, path.lastIndexOf("/") + 1);
+      } else {
+        basePath = path + "/";
+      }
+      var base = document.createElement("base");
+      base.href = basePath;
+      document.head.appendChild(base);
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <meta name="theme-color" content="#0f172a" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
