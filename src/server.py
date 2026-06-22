@@ -11,6 +11,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 
+from src.config.rules import RulesConfig, get_rules, load_rules, save_rules
 from src.discipline.layer import acknowledge_entry, build_alerts, log_alerts
 from src.engine.decision import evaluate_all
 from src.models.enums import (
@@ -131,6 +132,11 @@ def create_review(payload: ReviewRequest) -> dict:
     alerts = build_alerts(review.decisions, thesis_map)
     log_alerts(log, alerts)
     store.save_discipline_log(log)
+
+    from src.notify.feishu import notify_discipline_if_needed
+
+    notify_discipline_if_needed(alerts, review_date=str(review.review_date))
+
     return {
         "review": review.model_dump(mode="json"),
         "markdown": markdown,
@@ -158,6 +164,18 @@ def ack_discipline(payload: AckRequest) -> dict:
         defer_reason=payload.defer_reason,
     )
     store.save_discipline_log(log)
+    return {"ok": True}
+
+
+@app.get("/api/rules")
+def get_rules_config() -> dict:
+    return load_rules(ROOT).model_dump(mode="json")
+
+
+@app.post("/api/rules")
+def update_rules_config(payload: RulesConfig) -> dict:
+    save_rules(payload, ROOT)
+    get_rules.cache_clear()
     return {"ok": True}
 
 

@@ -37,6 +37,7 @@ jobs:
       - name: Run daily review
         env:
           MARKET_INFO: ${{ github.event.inputs.market_info || secrets.MARKET_INFO || '' }}
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
         run: python scripts/ci_daily_review.py
 
       - name: Build GitHub Pages

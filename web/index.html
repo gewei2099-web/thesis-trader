@@ -50,6 +50,13 @@
     <section id="panel-discipline" class="panel">
       <div id="discipline-list"></div>
     </section>
+
+    <section id="panel-rules" class="panel">
+      <p class="item-meta">编辑决策阈值，保存后立即生效（无需改代码）。</p>
+      <textarea id="rules-json" rows="18"></textarea>
+      <button class="btn primary" onclick="saveRules()">保存规则</button>
+      <div id="rules-msg" class="item-meta"></div>
+    </section>
   </main>
 
   <nav class="bottom-nav">
@@ -59,6 +66,7 @@
     <button data-tab="thesis">逻辑</button>
     <button data-tab="review">复盘</button>
     <button data-tab="discipline">纪律</button>
+    <button data-tab="rules">规则</button>
   </nav>
 
   <script src="/static/app.js"></script>

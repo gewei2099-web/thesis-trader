@@ -41,6 +41,7 @@ function refreshCurrentTab(tab) {
   if (tab === "positions") renderPositions();
   if (tab === "thesis") renderThesis();
   if (tab === "discipline") loadDiscipline();
+  if (tab === "rules") loadRules();
 }
 
 async function init() {
@@ -337,6 +338,23 @@ async function deferDiscipline(id) {
   if (!reason) return;
   await api("/api/discipline/ack", { method: "POST", body: JSON.stringify({ entry_id: id, acknowledged: false, defer_reason: reason }) });
   loadDiscipline();
+}
+
+async function loadRules() {
+  const data = await api("/api/rules");
+  document.getElementById("rules-json").value = JSON.stringify(data, null, 2);
+  document.getElementById("rules-msg").textContent = "";
+}
+
+async function saveRules() {
+  try {
+    const payload = JSON.parse(document.getElementById("rules-json").value);
+    await api("/api/rules", { method: "POST", body: JSON.stringify(payload) });
+    document.getElementById("rules-msg").textContent = "已保存，决策引擎将使用新规则。";
+    loadDecisions();
+  } catch (e) {
+    document.getElementById("rules-msg").textContent = "保存失败：" + e.message;
+  }
 }
 
 init().catch((err) => alert("加载失败：" + err.message));

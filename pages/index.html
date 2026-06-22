@@ -28,44 +28,32 @@
 <body>
   <header class="app-header">
     <h1>thesis-trader</h1>
-    <p id="generated-at">只读 · GitHub Pages</p>
+    <p id="generated-at">公开摘要 · 无敏感持仓</p>
   </header>
 
   <main id="app">
     <section id="panel-dashboard" class="panel active">
       <div class="card-grid" id="dashboard-cards"></div>
-      <div id="dashboard-alerts" class="alert-list"></div>
-    </section>
-
-    <section id="panel-watchlist" class="panel">
-      <div id="watchlist-list"></div>
-    </section>
-
-    <section id="panel-positions" class="panel">
-      <div id="positions-list"></div>
-    </section>
-
-    <section id="panel-thesis" class="panel">
-      <div id="thesis-list"></div>
+      <div id="dashboard-decisions"></div>
+      <div id="dashboard-discipline" class="alert-list"></div>
     </section>
 
     <section id="panel-review" class="panel">
       <div id="review-list"></div>
       <pre id="review-output" class="review-output hidden"></pre>
     </section>
-
-    <section id="panel-discipline" class="panel">
-      <div id="discipline-list"></div>
-    </section>
   </main>
 
+  <div class="flash-note-bar">
+    <a id="flash-note-link" class="btn primary flash-btn" href="#" target="_blank" rel="noopener">
+      速记观察 / 修改逻辑
+    </a>
+    <p class="flash-hint">跳转到 GitHub Issue，收盘后整理到本地 JSON</p>
+  </div>
+
   <nav class="bottom-nav">
-    <button data-tab="dashboard" class="active">首页</button>
-    <button data-tab="watchlist">股票池</button>
-    <button data-tab="positions">持仓</button>
-    <button data-tab="thesis">逻辑</button>
+    <button data-tab="dashboard" class="active">摘要</button>
     <button data-tab="review">复盘</button>
-    <button data-tab="discipline">纪律</button>
   </nav>
 
   <script src="./app.js"></script>

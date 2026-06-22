@@ -1,0 +1,32 @@
+{
+  "profit_take": {
+    "cycle": [15, 35],
+    "growth": [25, 50],
+    "event": [10, 25],
+    "default": [15, 30]
+  },
+  "stop_loss_pct": -8,
+  "reduce_pct": {
+    "weakening": 30,
+    "failed_metrics": 40,
+    "trend_down": 40,
+    "range": 20,
+    "force_take_profit": 30,
+    "sentiment_high": 20,
+    "stop_loss": 50,
+    "fundamental_weakened_growth": 30,
+    "fundamental_weakened_other": 20
+  },
+  "sentiment_high_min_return_pct": 10,
+  "rule_priority": [
+    "logic_fail",
+    "stop_loss",
+    "logic_weakening",
+    "failed_metrics",
+    "fundamental_weakened",
+    "trend_down",
+    "force_take_profit",
+    "range_take_profit",
+    "sentiment_high"
+  ]
+}

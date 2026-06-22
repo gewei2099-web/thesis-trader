@@ -1,0 +1,36 @@
+{
+  "generated_at": "2026-06-22T13:59:05.534203+00:00",
+  "portfolio": {
+    "position_count": 1,
+    "watchlist_count": 2,
+    "thesis_count": 1,
+    "avg_return_pct": 9.37,
+    "by_stock_type": {
+      "cycle": 1
+    },
+    "by_action": {
+      "hold": 1,
+      "reduce": 0,
+      "exit": 0,
+      "add": 0
+    }
+  },
+  "decisions": [
+    {
+      "label": "持仓1",
+      "stock_type": "cycle",
+      "action": "hold",
+      "reduce_pct": 0,
+      "return_pct": 9.37,
+      "trend": "up",
+      "trigger_summary": "未触发减仓/清仓规则，继续持有并跟踪逻辑",
+      "priority": 0
+    }
+  ],
+  "discipline": {
+    "alert_count": 0,
+    "severity": "none",
+    "summary": "当前无纪律提醒"
+  },
+  "flash_note_url": "https://github.com/gewei2099-web/thesis-trader/issues/new?template=flash_note"
+}

@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+from src.notify.feishu import notify_discipline_if_needed  # noqa: E402
 from src.discipline.layer import build_alerts, log_alerts  # noqa: E402
 from src.review.daily import run_daily_review  # noqa: E402
 from src.storage import DataStore  # noqa: E402
@@ -21,12 +22,15 @@ def main() -> None:
 
     log = store.load_discipline_log()
     thesis_map = {t.symbol: t for t in store.load_all_thesis()}
-    log_alerts(log, build_alerts(review.decisions, thesis_map))
+    alerts = build_alerts(review.decisions, thesis_map)
+    log_alerts(log, alerts)
     store.save_discipline_log(log)
+
+    notify_discipline_if_needed(alerts, review_date=str(review.review_date))
 
     print(f"Review generated for {review.review_date}")
     print(f"Market info length: {len(market_info)} chars")
-    print(f"Discipline alerts: {len(review.discipline_alerts)}")
+    print(f"Discipline alerts: {len(alerts)}")
     print("---")
     print(markdown[:500] + ("..." if len(markdown) > 500 else ""))
 

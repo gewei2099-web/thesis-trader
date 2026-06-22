@@ -1,0 +1,15 @@
+name: Flash Note
+description: 盘中速记，收盘后整理到本地 data/
+title: "[速记] "
+labels:
+  - 速记
+body:
+  - type: textarea
+    id: note
+    attributes:
+      label: 观察 / 逻辑变化 / 待办
+      description: 可写股票代码、逻辑是否变化、盘中想法等。收盘后在本地 thesis-trader 中整理入 JSON。
+      placeholder: |
+        例：锂价反弹，中矿逻辑仍有效，但需关注 XX
+    validations:
+      required: true

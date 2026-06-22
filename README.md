@@ -1,8 +1,8 @@
 # thesis-trader
 
-个人交易决策辅助系统：股票池、持仓、逻辑卡片、决策引擎、每日复盘、纪律监督。
+个人交易决策辅助系统。
 
-## 本地使用（可编辑）
+## 本地使用（完整数据 · 可编辑）
 
 ```powershell
 cd D:\Projects\thesis-trader
@@ -10,78 +10,69 @@ cd D:\Projects\thesis-trader
 .\run.bat
 ```
 
-浏览器：**http://localhost:8765**（手机同 WiFi 访问 `http://<电脑IP>:8765`）
+访问 **http://localhost:8765** — 含持仓成本、逻辑卡片、规则配置、纪律确认。
 
-## 手机远程查看（Phase 4 · GitHub Pages）
+## 手机公开页（摘要 · 无敏感数据）
 
-### 1. 推送到 GitHub
+**https://gewei2099-web.github.io/thesis-trader/**
 
-```powershell
-cd D:\Projects\thesis-trader
-git add .
-git commit -m "init thesis-trader"
-git remote add origin https://github.com/<你的用户名>/thesis-trader.git
-git push -u origin main
-```
+Pages 仅发布：
+- `public/summary.json` — 持仓数、平均浮盈、匿名决策摘要
+- `reports/*.md` — 复盘报告
+- **速记按钮** — 跳转 GitHub Issue 记录盘中想法
 
-### 2. 启用 GitHub Pages
+完整 `data/` 不在 Pages 上展示。**若仓库为 Public，GitHub 主分支上的 data/ 仍可见，建议将仓库设为 Private。**
 
-仓库 **Settings → Pages → Build and deployment**：
+## 自动化（GitHub Actions）
 
-- Source: **Deploy from a branch**
-- Branch: **main** / **/docs**
-
-保存后访问：`https://<用户名>.github.io/thesis-trader/`
-
-手机浏览器打开后可「添加到主屏幕」，当作 App 使用（只读）。
-
-### 3. 自动每日复盘
-
-已配置 GitHub Actions：
-
-| 工作流 | 触发 | 作用 |
+| 工作流 | 时间 | 作用 |
 |--------|------|------|
-| `Daily Review` | 周一至周五 21:00（北京）+ 手动 | 生成复盘 → 构建 Pages → 提交 |
-| `Build Pages` | push 到 main（data/src 变更） | 重建静态站点 |
+| Fetch Closing Prices | 工作日 15:30 | akshare 更新收盘价 |
+| Daily Review | 工作日 21:00 | 复盘 + 飞书纪律推送 + 构建 Pages |
+| Build Pages | push 后 | 重建公开站点 |
 
-**手动触发复盘（可填市场信息）：**
+### Secrets（Settings → Secrets → Actions）
 
-GitHub 仓库 → **Actions** → **Daily Review** → **Run workflow** → 填写 `market_info`
+| Secret | 用途 |
+|--------|------|
+| `FEISHU_WEBHOOK_URL` | 纪律触发时飞书机器人推送 |
+| `MARKET_INFO` | 定时复盘可选市场信息（可留空） |
 
-**可选 Secret：** 在 Settings → Secrets 添加 `MARKET_INFO`，定时任务会自动使用。
+### 飞书机器人
 
-### 4. 本地工作流
+1. 飞书群 → 设置 → 群机器人 → 自定义机器人 → 复制 Webhook
+2. 填入 GitHub Secret `FEISHU_WEBHOOK_URL`
 
-```powershell
-# 更新持仓/逻辑后，本地构建 Pages 预览
-.\build-pages.bat
+## 规则配置
 
-# 然后提交 data/ 和 docs/
-git add data/ docs/
-git commit -m "update positions and pages"
-git push
+编辑 `data/config/rules.json`，或本地 Web **规则** 页可视化保存。
+
+```json
+{
+  "profit_take": { "cycle": [15, 35], "growth": [25, 50], "event": [10, 25] },
+  "stop_loss_pct": -8
+}
 ```
 
-## 模块
+## 日常流程
 
-| 模块 | 本地 | Pages |
-|------|------|-------|
-| watchlist | 可编辑 | 只读 |
-| positions | 可编辑 | 只读 |
-| thesis | 可编辑 | 只读 |
-| decision engine | 实时 | 构建时快照 |
-| daily review | 手动粘贴 | Actions 自动生成 |
-| discipline | 可确认 | 只读 |
+```
+盘中：手机 Pages → 速记 Issue
+收盘：Actions 自动更新收盘价
+      本地 run.bat 更新趋势/逻辑/规则
+      生成复盘 → build-pages.bat → git push
+      纪律触发 → 飞书推送 → 本地确认执行
+```
 
 ## CLI
 
 ```powershell
 python -m src.cli decisions
-python -m src.cli review --market-info "今日市场信息..."
-python -m src.cli build-pages
+python -m src.cli review --market-info "..."
+python scripts/build_pages.py
+python scripts/fetch_prices.py
 ```
 
-## 数据
+## 仓库
 
-- 源数据：`data/`（JSON，纳入 Git）
-- 静态站点：`docs/`（由 `scripts/build_pages.py` 生成，纳入 Git）
+https://github.com/gewei2099-web/thesis-trader
