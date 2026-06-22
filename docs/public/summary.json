@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-06-22T14:38:31.920386+00:00",
+  "generated_at": "2026-06-22T14:39:04.684481+00:00",
   "portfolio": {
     "position_count": 1,
     "watchlist_count": 2,
     "thesis_count": 1,
-    "avg_return_pct": 20.74,
+    "avg_return_pct": 6.25,
     "by_stock_type": {
       "cycle": 1
     },
@@ -21,7 +21,7 @@
       "stock_type": "cycle",
       "action": "hold",
       "reduce_pct": 0,
-      "return_pct": 20.74,
+      "return_pct": 6.25,
       "trend": "up",
       "trigger_summary": "未触发减仓/清仓规则，继续持有并跟踪逻辑",
       "priority": 0
