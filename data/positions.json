@@ -4,15 +4,15 @@
       "symbol": "002738",
       "name": "中矿资源",
       "shares": 100.0,
-      "avg_cost": 42.5,
-      "current_price": 42.5,
+      "avg_cost": 53.63,
+      "current_price": 53.63,
       "trend": "up",
       "fundamental_state": "unchanged",
       "market_sentiment": "medium",
       "opened_at": "2026-06-01",
       "notes": "",
       "return_pct": 0.0,
-      "market_value": 4250.0
+      "market_value": 5363.0
     }
   ]
 }
