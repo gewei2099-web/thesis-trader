@@ -1,16 +1,16 @@
 {
-  "generated_at": "2026-10-12T21:29:02.581825+00:00",
+  "generated_at": "2026-10-13T15:13:46.436015+00:00",
   "portfolio": {
     "position_count": 1,
     "watchlist_count": 2,
     "thesis_count": 1,
-    "avg_return_pct": 0.0,
+    "avg_return_pct": -28.31,
     "by_stock_type": {
       "cycle": 1
     },
     "by_action": {
-      "hold": 1,
-      "reduce": 0,
+      "hold": 0,
+      "reduce": 1,
       "exit": 0,
       "add": 0
     }
@@ -19,18 +19,21 @@
     {
       "label": "持仓1",
       "stock_type": "cycle",
-      "action": "hold",
-      "reduce_pct": 0,
-      "return_pct": 0.0,
+      "action": "reduce",
+      "reduce_pct": 50,
+      "return_pct": -28.31,
       "trend": "up",
-      "trigger_summary": "未触发减仓/清仓规则，继续持有并跟踪逻辑",
-      "priority": 0
+      "trigger_summary": "止损纪律：亏损已达 -28.31%",
+      "priority": 90
     }
   ],
   "discipline": {
-    "alert_count": 0,
-    "severity": "none",
-    "summary": "当前无纪律提醒"
+    "alert_count": 1,
+    "severity": "high",
+    "summary": "有 1 条纪律提醒待处理（减仓级）",
+    "rule_names": [
+      "stop_loss"
+    ]
   },
   "flash_note_url": "https://github.com/gewei2099-web/thesis-trader/issues/new?template=flash_note"
 }
